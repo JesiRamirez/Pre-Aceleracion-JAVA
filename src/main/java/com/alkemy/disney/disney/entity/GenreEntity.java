@@ -5,19 +5,19 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "Genero")
+@Table (name = "Genre")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class GeneroEntity {
+public class GenreEntity {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
+    private String name;
 
-    private String imagen;
+    private String image;
 
 }

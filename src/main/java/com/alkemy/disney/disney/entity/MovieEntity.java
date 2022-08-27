@@ -9,35 +9,35 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "PeliculaSerie")
+@Table(name = "movies")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PeliculaSerieEntity {
+public class MovieEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String imagen;
+    private String image;
 
-    private String titulo;
+    private String title;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "create_date")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fechaCreacion;
+    private LocalDate createDate;
 
-    private int calificacion;
+    private int calification;
 
     // conexion con entidad ganero
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-    private GeneroEntity genero;
+    @JoinColumn(name = "genre_id", insertable = false, updatable = false)
+    private GenreEntity genre;
 
-    @Column(name = "genero_id", nullable = false)
-    private Long generoId;
+    @Column(name = "genre_id", nullable = false)
+    private Long genreId;
 
 
     @ManyToMany(
@@ -46,10 +46,10 @@ public class PeliculaSerieEntity {
                     CascadeType.MERGE
             })
     @JoinTable(
-            name = "personaje_pelicula",
-            joinColumns = @JoinColumn(name = "peliculas_series_id"),
-            inverseJoinColumns = @JoinColumn(name = "personaje_id"))
-    private Set<PersonajeEntity> personajes = new HashSet<>();
+            name = "actor_movie",
+            joinColumns = @JoinColumn(name = "movies_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    private Set<ActorEntity> actors = new HashSet<>();
 
 
     @Override
@@ -58,7 +58,7 @@ public class PeliculaSerieEntity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final PeliculaSerieEntity other = (PeliculaSerieEntity) obj;
+        final MovieEntity other = (MovieEntity) obj;
         return other.id == this.id;
     }
 
