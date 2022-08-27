@@ -1,7 +1,6 @@
 package com.alkemy.disney.disney.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,8 +10,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "PeliculaSerie")
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class PeliculaSerieEntity {
 

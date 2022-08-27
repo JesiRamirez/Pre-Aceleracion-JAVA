@@ -1,14 +1,14 @@
 package com.alkemy.disney.disney.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table (name = "Genero")
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class GeneroEntity {
 
