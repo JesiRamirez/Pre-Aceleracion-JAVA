@@ -46,10 +46,10 @@ public class MovieEntity {
                     CascadeType.MERGE
             })
     @JoinTable(
-            name = "actor_movie",
+            name = "character_movie",
             joinColumns = @JoinColumn(name = "movies_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id"))
-    private Set<ActorEntity> actors = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "character_id"))
+    private Set<CharacterEntity> characters = new HashSet<>();
 
 
     @Override

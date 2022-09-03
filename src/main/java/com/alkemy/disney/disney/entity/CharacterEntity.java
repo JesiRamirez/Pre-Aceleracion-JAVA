@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Actors")
+@Table(name = "Character")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ActorEntity {
+public class CharacterEntity {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class ActorEntity {
 
     private String history;
 
-    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "genre", cascade = CascadeType.ALL)
     private List<MovieEntity> movies = new ArrayList<>();
 
     //Agregar o eliminar personajes
