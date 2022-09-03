@@ -2,13 +2,14 @@ package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.GenreDTO;
 import com.alkemy.disney.disney.entity.GenreEntity;
+import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.mapper.GenreMapper;
 import com.alkemy.disney.disney.repository.GenreRepository;
 import com.alkemy.disney.disney.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
 @Service
 
@@ -20,16 +21,12 @@ public class GenreServiceImp implements GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    public GenreDTO save(GenreDTO dto) {
-        GenreEntity entity = genreMapper.GenreDTO2Entity(dto);
+    @Transactional
+    public GenreDTO save(GenreDTO dto) throws ParamNotFound {
+        GenreEntity entity = genreMapper.genreDTO2Entity(dto);
         GenreEntity entitySaved = genreRepository.save(entity);
-        GenreDTO result = genreMapper.GenreEntity2DTO(entitySaved);
+        GenreDTO result = genreMapper.genreEntity2DTO(entitySaved);
         return result;
     }
 
-    public List<GenreDTO> getAllGenres() {
-        List<GenreEntity> entities = genreRepository.findAll();
-        List<GenreDTO> result = genreMapper.genreEntityList2DTOList(entities);
-        return result;
-    }
 }
