@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.dto;
 
+import com.alkemy.disney.disney.enums.Calification;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public class MovieDTO {
 
     private LocalDate createDate;
 
-    private int calification;
+    private Calification calification;
 
     private Long genreId;
 
