@@ -13,7 +13,6 @@ import com.alkemy.disney.disney.repository.specification.CharacterSpecification;
 import com.alkemy.disney.disney.service.CharacterService;
 import com.alkemy.disney.disney.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -102,8 +101,8 @@ public class CharacterServiceImp implements CharacterService {
     @Override
     public List<CharacterBasicDTO> getByFilters(String name, String age, Set<Long> movies, String order) {
         CharacterFilterDTO filtersDTO =new CharacterFilterDTO(name, age, movies, order);
-        List<CharacterEntity> entities = this.characterRepository.findAll((Sort) this.characterSpecification.getByFilters(filtersDTO));
-        List<CharacterBasicDTO> basicDTOs = this.characterMapper.characterEntityList2BasicDTO(entities);
+        List<CharacterEntity> entities = characterRepository.findAll(characterSpecification.getByFilters(filtersDTO));
+        List<CharacterBasicDTO> basicDTOs = characterMapper.characterEntityList2BasicDTO(entities);
         return basicDTOs;
     }
 

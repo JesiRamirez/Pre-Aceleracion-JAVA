@@ -89,7 +89,7 @@ public class MovieServiceImp implements MovieService {
     @Override
     public List<MovieBasicDTO> getByFilters(String name, String genre, String order) {
         MovieFilterDTO filterDTO = new MovieFilterDTO(name, genre, order);
-        List<MovieEntity> entities = movieRepository.findAll((Sort) movieSpecification.getByFilters(filterDTO));
+        List<MovieEntity> entities = movieRepository.findAll(movieSpecification.getByFilters(filterDTO));
         List<MovieBasicDTO> dtos = movieMapper.movieEntityList2BasicDTO(entities);
         return dtos;
     }
