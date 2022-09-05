@@ -1,6 +1,9 @@
 package com.alkemy.disney.disney.entity;
 
+import com.alkemy.disney.disney.enums.Calification;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,10 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "movies")
+@Table(name = "Movie")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE movie SET deleted = true WHERE id=?")
+@Where(clause = "deleted = false")
 
 public class MovieEntity {
 
@@ -25,14 +30,15 @@ public class MovieEntity {
     private String title;
 
     @Column(name = "create_date")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate createDate;
 
-    private int calification;
+    @Enumerated (EnumType.STRING)
+    private Calification calification;
 
-    // conexion con entidad ganero
+    private boolean deleted = Boolean.FALSE;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "genre_id", insertable = false, updatable = false)
     private GenreEntity genre;
 
@@ -47,19 +53,8 @@ public class MovieEntity {
             })
     @JoinTable(
             name = "character_movie",
-            joinColumns = @JoinColumn(name = "movies_id"),
+            joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "character_id"))
     private Set<CharacterEntity> characters = new HashSet<>();
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final MovieEntity other = (MovieEntity) obj;
-        return other.id == this.id;
-    }
 
 }

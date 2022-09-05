@@ -1,6 +1,8 @@
 package com.alkemy.disney.disney.entity;
 
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,11 +13,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE Character SET deleted = true WHERE id=?")
+@Where(clause = "deleted = false")
 
 public class CharacterEntity {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String image;
@@ -28,18 +32,10 @@ public class CharacterEntity {
 
     private String history;
 
-    @ManyToMany(mappedBy = "genre", cascade = CascadeType.ALL)
-    private List<MovieEntity> movies = new ArrayList<>();
+    private boolean deleted = Boolean.FALSE;
 
-    //Agregar o eliminar personajes
-
-    public void addMovie(MovieEntity movie){
-        this.movies.add(movie);
-    }
-
-    public void removeMovie(MovieEntity movie){
-        this.movies.add(movie);
-    }
-
+    @ManyToMany(mappedBy = "characters", cascade = CascadeType.PERSIST)
+    public List<MovieEntity> movies = new ArrayList<>();
 
 }
+
