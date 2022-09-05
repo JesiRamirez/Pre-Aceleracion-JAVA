@@ -98,14 +98,6 @@ public class CharacterMapper {
         return dtos;
     }
 
-    public Set<CharacterEntity> characterDTOList2EntitySet(List<CharacterDTO> dtos) throws ParamNotFound{
-        Set<CharacterEntity> entities = new HashSet<>();
-        for(CharacterDTO aux : dtos){
-            entities.add(characterDTO2Entity(aux));
-        }
-        return entities;
-    }
-
     public Set<CharacterEntity> characterDTOList2EntitySetMovieCreation(List<CharacterDTO> dtos) throws ParamNotFound{
         Set<CharacterEntity> entities = new HashSet<>();
         for(CharacterDTO aux : dtos){
