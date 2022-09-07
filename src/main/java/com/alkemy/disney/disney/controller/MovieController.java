@@ -23,8 +23,9 @@ public class MovieController {
         try {
             MovieDTO movieSaved = movieService.save(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(movieSaved);
-        }catch (ParamNotFound e){
-            throw new RuntimeException(e);
+        } catch (ParamNotFound e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
 
