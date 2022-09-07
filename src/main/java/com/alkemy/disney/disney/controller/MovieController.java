@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.controller;
 
-import com.alkemy.disney.disney.dto.MovieBasicDTO;
+import com.alkemy.disney.disney.dto.MovieResponseDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.service.MovieService;
@@ -29,12 +29,12 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDTO> getById(@PathVariable Long id){
+    public ResponseEntity<MovieDTO> getById(@PathVariable("id") Long id){
         MovieDTO movieDTO = movieService.getById(id);
         return ResponseEntity.ok().body(movieDTO);
     }
 
-    @GetMapping("/{list}")
+    @GetMapping("/list")
     public ResponseEntity<List<MovieDTO>> getAll(){
         List<MovieDTO> movies = movieService.getAllMovies();
         return ResponseEntity.ok().body(movies);
@@ -42,7 +42,7 @@ public class MovieController {
 
 
     @PostMapping("/{id}")
-    public ResponseEntity<MovieDTO> update(@PathVariable Long id, @RequestBody MovieDTO dto) {
+    public ResponseEntity<MovieDTO> update(@PathVariable("id") Long id, @RequestBody MovieDTO dto) {
         try{
             MovieDTO movieUpdated = movieService.update(id, dto);
             return ResponseEntity.status(HttpStatus.CREATED).body(movieUpdated);
@@ -58,12 +58,12 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieBasicDTO>> getByFilters(
+    public ResponseEntity<List<MovieResponseDTO>> getByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String genre,
             @RequestParam(required = false, defaultValue = "ASC") String order
     ){
-        List<MovieBasicDTO> movies = movieService.getByFilters(name, genre, order);
+        List<MovieResponseDTO> movies = movieService.getByFilters(name, genre, order);
         return ResponseEntity.ok(movies);
     }
 

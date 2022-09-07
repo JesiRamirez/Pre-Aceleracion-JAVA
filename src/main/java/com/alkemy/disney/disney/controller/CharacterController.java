@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.controller;
 
-import com.alkemy.disney.disney.dto.CharacterBasicDTO;
+import com.alkemy.disney.disney.dto.CharacterResponseDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 import com.alkemy.disney.disney.service.CharacterService;
@@ -32,14 +32,10 @@ public class CharacterController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<CharacterDTO> update(@PathVariable Long id, @RequestBody CharacterDTO dto){
-        try{
-            CharacterDTO characterUpdated = characterService.update(id, dto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(characterUpdated);
-        }catch (ParamNotFound e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    public ResponseEntity<CharacterDTO> update(@PathVariable Long id, @RequestBody CharacterDTO dto) throws ParamNotFound {
+        CharacterDTO characterUpdated = characterService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(characterUpdated);
+
     }
 
     @GetMapping("/{id}")
@@ -61,13 +57,13 @@ public class CharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CharacterBasicDTO>> getDetailsByFilters(
+    public ResponseEntity<List<CharacterResponseDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String age,
             @RequestParam(required = false) Set<Long> movies,
             @RequestParam(required = false, defaultValue="ASC") String order
     ){
-        List<CharacterBasicDTO> characters = characterService.getByFilters(name, age, movies, order);
+        List<CharacterResponseDTO> characters = characterService.getByFilters(name, age, movies, order);
         return ResponseEntity.ok(characters);
     }
 

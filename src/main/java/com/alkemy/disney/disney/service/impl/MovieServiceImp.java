@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.service.impl;
 
-import com.alkemy.disney.disney.dto.MovieBasicDTO;
+import com.alkemy.disney.disney.dto.MovieResponseDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.dto.MovieFilterDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
@@ -12,7 +12,6 @@ import com.alkemy.disney.disney.repository.MovieRepository;
 import com.alkemy.disney.disney.repository.specification.MovieSpecification;
 import com.alkemy.disney.disney.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -87,10 +86,10 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public List<MovieBasicDTO> getByFilters(String name, String genre, String order) {
+    public List<MovieResponseDTO> getByFilters(String name, String genre, String order) {
         MovieFilterDTO filterDTO = new MovieFilterDTO(name, genre, order);
         List<MovieEntity> entities = movieRepository.findAll(movieSpecification.getByFilters(filterDTO));
-        List<MovieBasicDTO> dtos = movieMapper.movieEntityList2BasicDTO(entities);
+        List<MovieResponseDTO> dtos = movieMapper.movieEntityList2BasicDTO(entities);
         return dtos;
     }
 

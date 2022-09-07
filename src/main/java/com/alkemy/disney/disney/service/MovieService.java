@@ -1,6 +1,6 @@
 package com.alkemy.disney.disney.service;
 
-import com.alkemy.disney.disney.dto.MovieBasicDTO;
+import com.alkemy.disney.disney.dto.MovieResponseDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.exception.ParamNotFound;
 
@@ -18,7 +18,7 @@ public interface MovieService {
 
     void delete(Long id);
 
-    List<MovieBasicDTO> getByFilters(String name, String genre, String order);
+    List<MovieResponseDTO> getByFilters(String name, String genre, String order);
 
     void addCharacter(Long movieId, Long characterId) throws ParamNotFound;
 

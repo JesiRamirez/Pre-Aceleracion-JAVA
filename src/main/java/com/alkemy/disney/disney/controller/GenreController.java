@@ -16,16 +16,11 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-
     @PostMapping
-    public ResponseEntity<GenreDTO> save(@RequestBody GenreDTO dto) {
-        try{
-            GenreDTO genreSaved = genreService.save(dto);
-            return ResponseEntity.status(HttpStatus.CREATED).body(genreSaved);
-        }catch(ParamNotFound e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    public ResponseEntity<GenreDTO> save(@RequestBody GenreDTO dto) throws ParamNotFound {
+        GenreDTO genreSaved = genreService.save(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(genreSaved);
     }
+
 }
 

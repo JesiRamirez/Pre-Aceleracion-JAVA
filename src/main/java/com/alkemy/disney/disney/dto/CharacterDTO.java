@@ -23,4 +23,5 @@ public class CharacterDTO {
     private String history;
 
     private List<MovieDTO> movies;
+
 }

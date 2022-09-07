@@ -9,6 +9,4 @@ public interface GenreService {
 
     GenreDTO save(GenreDTO dto) throws ParamNotFound;
 
-
-
 }

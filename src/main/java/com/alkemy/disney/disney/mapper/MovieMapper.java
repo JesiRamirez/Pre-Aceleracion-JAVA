@@ -1,9 +1,8 @@
 package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.CharacterDTO;
-import com.alkemy.disney.disney.dto.MovieBasicDTO;
+import com.alkemy.disney.disney.dto.MovieResponseDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
-import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.GenreEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
 import com.alkemy.disney.disney.exception.ParamNotFound;
@@ -98,16 +97,16 @@ public class MovieMapper {
         return dtos;
     }
 
-    public MovieBasicDTO movieEntity2BasicDTO(MovieEntity entity){
-        MovieBasicDTO basicDTO = new MovieBasicDTO();
+    public MovieResponseDTO movieEntity2BasicDTO(MovieEntity entity){
+        MovieResponseDTO basicDTO = new MovieResponseDTO();
         basicDTO.setImage(entity.getImage());
         basicDTO.setTitle(entity.getTitle());
         basicDTO.setCreateDate(entity.getCreateDate());
         return basicDTO;
     }
 
-    public List<MovieBasicDTO> movieEntityList2BasicDTO(List<MovieEntity> entities){
-        List<MovieBasicDTO> basicDTOs = new ArrayList<>();
+    public List<MovieResponseDTO> movieEntityList2BasicDTO(List<MovieEntity> entities){
+        List<MovieResponseDTO> basicDTOs = new ArrayList<>();
         for(MovieEntity aux : entities){
             basicDTOs.add(movieEntity2BasicDTO(aux));
         }
