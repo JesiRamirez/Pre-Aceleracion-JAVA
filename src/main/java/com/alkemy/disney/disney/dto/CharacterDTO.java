@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,6 +23,6 @@ public class CharacterDTO {
 
     private String history;
 
-    private List<MovieDTO> movies;
+    private List<MovieDTO> movies = new ArrayList<>();
 
 }

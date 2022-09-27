@@ -9,13 +9,13 @@ public class CharacterFilterDTO {
 
     private String name;
 
-    private String age;
+    private int age;
 
     private Set<Long> movies;
 
     private String order;
 
-    public CharacterFilterDTO(String name, String age, Set<Long> movies, String order) {
+    public CharacterFilterDTO(String name, int age, Set<Long> movies, String order) {
         this.name = name;
         this.age = age;
         this.movies = movies;

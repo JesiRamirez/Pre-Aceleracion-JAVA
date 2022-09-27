@@ -2,8 +2,6 @@ package com.alkemy.disney.disney.dto;
 
 import lombok.*;
 
-import java.util.Set;
-
 @Data
 
 

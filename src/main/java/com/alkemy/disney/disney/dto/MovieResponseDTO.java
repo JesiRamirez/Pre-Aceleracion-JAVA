@@ -10,6 +10,8 @@ import java.time.LocalDate;
 
 public class MovieResponseDTO {
 
+    private Long id;
+
     private String image;
 
     private String title;
