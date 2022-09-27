@@ -20,42 +20,36 @@ import java.util.List;
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {ParamNotFound.class})
-    protected ResponseEntity<Object> handleParamNotFound(RuntimeException ex, WebRequest request){
-        ApiErrorDTO errorDTO = new ApiErrorDTO(
-                HttpStatus.BAD_REQUEST,
-                ex.getMessage(),
-                Arrays.asList("Param not found")
+    @ExceptionHandler(value={ParamNotFound.class})
+    protected ResponseEntity<Object>handleParamNotFound(RuntimeException ex, WebRequest request){
+        ApiErrorDTO errorDTO=new ApiErrorDTO(
+                HttpStatus.BAD_REQUEST, ex.getMessage(), Arrays.asList("Param Not Found")
         );
         return handleExceptionInternal(ex, errorDTO, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
+
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request
-    ) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+
         List<String> errors = new ArrayList<>();
-        for(FieldError error : ex.getBindingResult().getFieldErrors()){
+        for (FieldError error : ex.getBindingResult().getFieldErrors()){
             errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
-        for(ObjectError error : ex.getBindingResult().getGlobalErrors()){
-            errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
+
+        for (ObjectError error: ex.getBindingResult().getGlobalErrors())
+        {
+            errors.add(error.getObjectName()+": "+error.getDefaultMessage());
         }
-
-        ApiErrorDTO apiError = new ApiErrorDTO(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
-
-        return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
+        ApiErrorDTO apiError = new ApiErrorDTO(HttpStatus.BAD_REQUEST,ex.getLocalizedMessage(),errors);
+        return handleExceptionInternal(ex,apiError,headers,apiError.getStatus(),request);
     }
 
-
-    @ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
+    /*@ExceptionHandler(value ={IllegalArgumentException.class, IllegalStateException.class})
     public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request){
+
         String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
-    }
+    }*/
+
 }
-
-
