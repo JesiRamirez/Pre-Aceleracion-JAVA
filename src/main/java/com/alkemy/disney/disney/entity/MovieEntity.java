@@ -12,11 +12,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Movie")
+@Table(name = "Movies")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE movie SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE Movies SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
 
 public class MovieEntity {
@@ -36,8 +36,6 @@ public class MovieEntity {
     @Enumerated (EnumType.STRING)
     private Calification calification;
 
-    private boolean deleted = Boolean.FALSE;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "genre_id", insertable = false, updatable = false)
     private GenreEntity genre;
@@ -56,5 +54,8 @@ public class MovieEntity {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "character_id"))
     private Set<CharacterEntity> characters = new HashSet<>();
+
+    private boolean deleted = Boolean.FALSE;
+
 
 }

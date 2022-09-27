@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Character")
+@Table(name = "Characters")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@SQLDelete(sql = "UPDATE Character SET deleted = true WHERE id=?")
-@Where(clause = "deleted = false")
+@SQLDelete(sql = "UPDATE Characters SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 
 public class CharacterEntity {
 
@@ -32,10 +32,9 @@ public class CharacterEntity {
 
     private String history;
 
-    private boolean deleted = Boolean.FALSE;
-
     @ManyToMany(mappedBy = "characters", cascade = CascadeType.PERSIST)
     public List<MovieEntity> movies = new ArrayList<>();
 
+    private boolean deleted = Boolean.FALSE;
 }
 
