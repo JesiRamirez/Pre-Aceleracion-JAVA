@@ -33,6 +33,7 @@ public class MovieSpecification {
                         criteriaBuilder.equal(root.get("genreId"), genre)
                 );
             }
+            
 
             query.distinct(true);
 

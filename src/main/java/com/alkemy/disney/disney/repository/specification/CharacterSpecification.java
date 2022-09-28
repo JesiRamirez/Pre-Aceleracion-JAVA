@@ -32,12 +32,14 @@ public class CharacterSpecification {
                 );
             }
 
-            if (StringUtils.hasLength(filterDTO.getAge())) {
+            /*if (StringUtils.hasLength(filterDTO.getAge())) {
                 Long age = Long.valueOf(filterDTO.getAge());
                 predicates.add(
                         criteriaBuilder.equal(root.get("age"), age)
                 );
-            }
+            }*/
+
+
 
             if (!CollectionUtils.isEmpty(filterDTO.getMovies())) {
                 Join<MovieEntity, CharacterEntity> join = root.join("movies", JoinType.INNER);
