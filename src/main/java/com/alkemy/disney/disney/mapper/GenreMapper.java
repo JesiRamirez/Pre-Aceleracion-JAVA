@@ -26,10 +26,11 @@ public class GenreMapper {
 
     }
 
-    public List<GenreDTO> genreEntityList2DTOList(List<GenreEntity> entities) {
-        List<GenreDTO> dtos = new ArrayList<>();
-        for (GenreEntity entity : entities){
-            dtos.add(genreEntity2DTO(entity));
+    public List<GenreDTO> genreEntityList2DTOList(List<GenreEntity> entities){
+        List<GenreDTO> dtos=new ArrayList<>();
+        for (GenreEntity entity: entities)
+        {
+            dtos.add(this.genreEntity2DTO(entity));
         }
         return dtos;
     }
